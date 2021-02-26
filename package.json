@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"index.js"
+    "start": "index.js"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,11 @@
   "bugs": {
     "url": "https://github.com/katsign/employee-tracker/issues"
   },
-  "homepage": "https://github.com/katsign/employee-tracker#readme"
+  "homepage": "https://github.com/katsign/employee-tracker#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "express": "^4.17.1",
+    "inquirer": "^8.0.0",
+    "mysql": "^2.18.1"
+  }
 }
