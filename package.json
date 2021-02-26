@@ -1,0 +1,30 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "A solution for managing a company's employees using Node, Inquirer, and MySQL.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katsign/employee-tracker.git"
+  },
+  "keywords": [
+    "node",
+    "inquirer",
+    "mysql",
+    "employee",
+    "tracker"
+  ],
+  "author": "katsign",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/katsign/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/katsign/employee-tracker#readme"
+}
