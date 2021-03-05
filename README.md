@@ -25,7 +25,9 @@ Keep track of your team's relevant information like departments, roles and emplo
 - Then, use the arrow keys and `ENTER` to make your menu selections.
 
 ## *Screenshots*
-![Demo of Command Line Prompts](./assets/screenshots/ss1.PNG)
+![Demo of Command Line View Prompts](./assets/screenshots/ss1.PNG)
+
+![Demo of Command Line Add Prompts](./assets/screenshots/ss2.PNG)
 
 ## *Questions?*
 - My Profile: [katsign](https://github.com/katsign)
