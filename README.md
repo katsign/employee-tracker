@@ -16,7 +16,8 @@ Keep track of your team's relevant information like departments, roles and emplo
 
 ## *Installation*
 ### Navigate into the repository folder on your local machine and open the built-in terminal. You will need Node.js installed to run this application.
-- In the root folder, open a terminal and type `npm i` to pull the project dependencies to your local. This app uses Express, MySQL and Inquirer along with some helper dependencies like Chalk and Nodemon.
+- In the root folder, open a terminal and type `npm i` to pull the project dependencies to your local. This app uses MySQL and Inquirer along with some helper dependencies like Chalk and Console.Table.
+- Navigate to the `/config` folder and update the MySQL connection information to match your own Workbench database instance.
 
 ## *Usage*
 ### :movie_camera: [This video](path) demonstrates the full functionality of this app.
@@ -25,8 +26,9 @@ Keep track of your team's relevant information like departments, roles and emplo
 - Then, use the arrow keys and `ENTER` to make your menu selections.
 
 ## *Screenshots*
+### :mag_right: View Actions
 ![Demo of Command Line View Prompts](./assets/screenshots/ss1.PNG)
-
+### :heavy_plus_sign: Add Actions
 ![Demo of Command Line Add Prompts](./assets/screenshots/ss2.PNG)
 
 ## *Questions?*
