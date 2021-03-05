@@ -10,20 +10,20 @@ connection.connect((error) => {
 
 prompt([
   {
-      type: 'list',
-      message: `${Chalk.black.bgCyan(
-          'Welcome to Employee Tracker. Select continue to begin.'
-      )}`,
-      choices: ['Continue', 'Quit'],
-      name: 'start',
+    type: "list",
+    message: `${Chalk.black.bgCyan(
+      "Welcome to Employee Tracker. Select continue to begin."
+    )}`,
+    choices: ["Continue", "Quit"],
+    name: "start",
   },
 ]).then((response) => {
   switch (response.start) {
-      case 'Continue':
-          menu();
-          break;
-      case 'Quit':
-          return console.log('Restart the application and try again.');
+    case "Continue":
+      menu();
+      break;
+    case "Quit":
+      return console.log("Restart the application and try again.");
   }
 });
 
@@ -70,11 +70,11 @@ function menu() {
       addDepartment();
     }
     if (choices === "Exit") {
-      console.log("Restart the application and try again.");
+      console.log("Thanks for using Employee Tracker. Until next time.");
       connection.end();
     }
   });
-  }
+}
 
 // VIEW actions...
 const viewAllEmployees = () => {
@@ -90,12 +90,14 @@ const viewAllEmployees = () => {
               ORDER BY employee.id ASC`;
   connection.query(sql, (error, response) => {
     if (error) throw error;
-    console.log('------------------------------------------------------------------')
-    console.log(`${Chalk.greenBright(
-      "All Employees:\n"
-    )}`)
+    console.log(
+      "------------------------------------------------------------------"
+    );
+    console.log(`${Chalk.greenBright("All Employees:\n")}`);
     console.table(response);
-    console.log('------------------------------------------------------------------')
+    console.log(
+      "------------------------------------------------------------------"
+    );
     menu();
   });
 };
@@ -106,12 +108,16 @@ const viewAllRoles = () => {
   INNER JOIN department ON role.department_id = department.id`;
   connection.query(sql, (error, response) => {
     if (error) throw error;
-    console.log('------------------------------------------------------------------')
-    console.log(`${Chalk.greenBright(
-      "List of Roles:\n"
-    )}`)
-    response.forEach((role) => {console.log(role.title);});
-    console.log('------------------------------------------------------------------')
+    console.log(
+      "------------------------------------------------------------------"
+    );
+    console.log(`${Chalk.greenBright("List of Roles:\n")}`);
+    response.forEach((role) => {
+      console.log(role.title);
+    });
+    console.log(
+      "------------------------------------------------------------------"
+    );
     menu();
   });
 };
@@ -120,14 +126,80 @@ const viewAllDepartments = () => {
   let sql = `SELECT department.id AS id, department.department_name AS department FROM department`;
   connection.query(sql, (error, response) => {
     if (error) throw error;
-    console.log('------------------------------------------------------------------')
-    console.log(`${Chalk.greenBright(
-      "List of Departments:\n"
-    )}`)
+    console.log(
+      "------------------------------------------------------------------"
+    );
+    console.log(`${Chalk.greenBright("List of Departments:\n")}`);
     console.table(response);
-    console.log('------------------------------------------------------------------')
+    console.log(
+      "------------------------------------------------------------------"
+    );
     menu();
   });
 };
 
 // ADD actions...
+const addEmployee = () => {
+  prompt([
+      {
+        type: "input",
+        name: "firstName",
+        message: "What is the employee's first name?",
+      },
+      {
+        type: "input",
+        name: "lastName",
+        message: "What is the employee's last name?",
+      },
+    ])
+    .then((answer) => {
+      const crit = [answer.firstName, answer.lastName];
+      const roleSql = `SELECT role.id, role.title FROM role`;
+      connection.query(roleSql, (error, data) => {
+        if (error) throw error;
+        const roles = data.map(({ id, title }) => ({ name: title, value: id }));
+        prompt([
+            {
+              type: "list",
+              name: "role",
+              message: "What is the employee's role?",
+              choices: roles,
+            },
+          ])
+          .then((roleChoice) => {
+            const role = roleChoice.role;
+            crit.push(role);
+            const managerSql = `SELECT * FROM employee`;
+            connection.query(managerSql, (error, data) => {
+              if (error) throw error;
+              const managers = data.map(({ id, first_name, last_name }) => ({
+                name: first_name + " " + last_name,
+                value: id,
+              }));
+              prompt([
+                  {
+                    type: "list",
+                    name: "manager",
+                    message: "Who is the employee's manager?",
+                    choices: managers,
+                  },
+                ])
+                .then((managerChoice) => {
+                  const manager = managerChoice.manager;
+                  crit.push(manager);
+                  const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+                                  VALUES (?, ?, ?, ?)`;
+                  connection.query(sql, crit, (error) => {
+                    if (error) throw error;
+                    console.log(
+                      "------------------------------------------------------------------"
+                    );
+                    console.log("Employee added successfully!");
+                    viewAllEmployees();
+                  });
+                });
+            });
+          });
+      });
+    });
+};
