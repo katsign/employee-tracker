@@ -317,16 +317,22 @@ const updateEmployeeRole = () => {
           choices: rolesArray,
         },
       ]).then((answer) => {
-        let newTitleID; 
+        let newTitleID;
         let employeeID;
 
         response.forEach((role) => {
-          if (answer.chosenRole === role.title) 
-          { newTitleID = role.id; }
+          if (answer.chosenRole === role.title) {
+            newTitleID = role.id;
+          }
         });
 
         response.forEach((employee) => {
-          if (answer.chosenEmployee === `${employee.first_name} ${employee.last_name}`) { employeeID = employee.id; }
+          if (
+            answer.chosenEmployee ===
+            `${employee.first_name} ${employee.last_name}`
+          ) {
+            employeeID = employee.id;
+          }
         });
 
         let sqls = `UPDATE employee SET employee.role_id = ? WHERE employee.id = ?`;
