@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-const inquirer = require('inquirer');
 
 var connection = mysql.createConnection({
     multipleStatements: true, 
@@ -9,10 +8,11 @@ var connection = mysql.createConnection({
     password: '3025880k!',
     database: 'employee_db'
   });
-
   
   connection.connect(function(err) {
     if (err) throw err;
     console.log(`You're tapped in at connection ID ${connection.threadId}\n`);
     start();
   });
+
+module.exports = connection;
