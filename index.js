@@ -324,6 +324,7 @@ const updateEmployeeRole = () => {
           if (answer.chosenRole === role.title) {
             newTitleID = role.id;
           }
+          console.log(newTitleID, '---------new Title in for each');
         });
 
         response.forEach((employee) => {
@@ -333,10 +334,13 @@ const updateEmployeeRole = () => {
           ) {
             employeeID = employee.id;
           }
+          console.log(employeeID, '---------employee ID in for each');
         });
 
-        let sqls = `UPDATE employee SET employee.role_id = ? WHERE employee.id = ?`;
-        connection.query(sqls, [newTitleID, employeeID], (error) => {
+        let sqls = `UPDATE employee 
+        SET employee.role_id = ? 
+        WHERE employee.id = ?`;
+        connection.query(sqls, newTitleID, employeeID, (error) => {
           if (error) throw error;
           console.log(
             "------------------------------------------------------------------"
