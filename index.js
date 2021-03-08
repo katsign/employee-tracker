@@ -265,24 +265,26 @@ const addRole = () => {
 };
 
 const addDepartment = () => {
-  prompt([
-    {
-      name: "newDepartment",
-      type: "input",
-      message: "Enter the name of the new department.",
-    },
-  ]).then((answer) => {
-    let sql = `INSERT INTO department (department_name) VALUES (?)`;
-    connection.query(sql, answer.newDepartment, (error, response) => {
-      if (error) throw error;
-      console.log(
-        "------------------------------------------------------------------"
-      );
-      console.log("Department created successfully!");
-      viewAllDepartments();
+prompt([
+      {
+        name: 'newDepartment',
+        type: 'input',
+        message: 'Enter the name of the new department.'
+      }
+    ])
+    .then((answer) => {
+      let sql = `INSERT INTO department (department_name) VALUES (?)`;
+      connection.query(sql, answer.newDepartment, (error, response) => {
+        if (error) throw error;
+        console.log(
+          "------------------------------------------------------------------"
+        );
+        console.log(answer.newDepartment + " department added successfully!");
+        viewAllEmployees();
+      });
     });
-  });
 };
+
 
 // UPDATE action...
 const updateEmployeeRole = () => {
