@@ -15,12 +15,12 @@
 Keep track of your team's relevant information like departments, roles and employees using this command line interface.
 
 ## *Installation*
-### Navigate into the repository folder on your local machine and open the built-in terminal. You will need Node.js installed to run this application.
-- In the root folder, open a terminal and type `npm i` to pull the project dependencies to your local. This app uses MySQL and Inquirer along with some helper dependencies like Chalk and Console.Table.
-- Navigate to the `/config` folder and update the MySQL connection information to match your own Workbench database instance.
+### Open the repository folder in your prefered code editor and pull up the built-in terminal. You will need Node.js installed to run this application.
+- Type `npm i` to pull the project dependencies to your local. This app uses MySQL and Inquirer along with some helper dependencies like Chalk and Console.Table.
+- Navigate to the `/config` folder and update the MySQL connection information to match your own Workbench instance.
 
 ## *Usage*
-### :movie_camera: [This video](path) demonstrates the full functionality of this app.
+### :movie_camera: [This video](https://vimeo.com/521077899) demonstrates the full functionality of this app.
 - This application runs entirely in the command line. The prompts interact with the data stored in the connected Employees MySQL database.
 - To begin viewing and editing Employee information, type `npm start` in the terminal to spin up the server.
 - Then, use the arrow keys and `ENTER` to make your menu selections.
