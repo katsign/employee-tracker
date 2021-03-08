@@ -30,6 +30,8 @@ Keep track of your team's relevant information like departments, roles and emplo
 ![Demo of Command Line View Prompts](./assets/screenshots/ss1.PNG)
 ### :heavy_plus_sign: Add Actions
 ![Demo of Command Line Add Prompts](./assets/screenshots/ss2.PNG)
+### :heavy_check_mark: Update Action
+![Demo of Command Line Update Role Prompt](./assets/screenshots/ss3.PNG)
 
 ## *Questions?*
 - My Profile: [katsign](https://github.com/katsign)
