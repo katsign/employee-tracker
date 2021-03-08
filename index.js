@@ -286,72 +286,52 @@ const addDepartment = () => {
 
 // UPDATE action...
 const updateEmployeeRole = () => {
-  let sql = `SELECT employee.id, employee.first_name, employee.last_name, role.id AS "role_id"
-  FROM employee, role, department WHERE department.id = role.department_id AND role.id = employee.role_id`;
-  connection.query(sql, (error, response) => {
-    if (error) throw error;
-    let employeeNamesArray = [];
-    response.forEach((employee) => {
-      employeeNamesArray.push(`${employee.first_name} ${employee.last_name}`);
-    });
 
-    let sql = `SELECT role.id, role.title FROM role`;
-    connection.query(sql, (error, response) => {
-      if (error) throw error;
-      let rolesArray = [];
-      response.forEach((role) => {
-        rolesArray.push(role.title);
-      });
+  let employeesArray = []
 
-      prompt([
-        {
-          name: "chosenEmployee",
-          type: "list",
-          message: "Which employee has a new role?",
-          choices: employeeNamesArray,
-        },
-        {
-          name: "chosenRole",
-          type: "list",
-          message: "What is their new role?",
-          choices: rolesArray,
-        },
-      ]).then((answer) => {
-        let newTitleID;
-        let employeeID;
+  connection.query(
+      `SELECT first_name, last_name FROM employee`,
+      (err, res) => {
+          if (err) throw err;
+          prompt([
+              {
+                  type: "list",
+                  name: "employee",
+                  message: "Which employee has a new role?",
+                  choices() {
+                      res.forEach(employee => {
+                          employeesArray.push(`${employee.first_name} ${employee.last_name}`);
+                      });
+                      return employeesArray;
+                  }
+              },
+              {
+                  type: "input",
+                  name: "role",
+                  message: `Enter the new role ID from the choices below.${Chalk.greenBright('\nDesigner: 1\nSenior Designer: 2\nPresident: 3\nIntern: 4\nConsultant: 5\nPress: 6\nTemp: 7\n' + Chalk.cyan('Your Answer: '))}`
+              }
+          ]).then( (answers) => {
 
-        response.forEach((role) => {
-          if (answer.chosenRole === role.title) {
-            newTitleID = role.id;
-          }
-          console.log(newTitleID, '---------new Title in for each');
-        });
+              const updateEmployeeRole = answers.employee.split(' ');
+              const updateEmployeeRoleFirstName = JSON.stringify(updateEmployeeRole[0]);
+              const updateEmployeeRoleLastName = JSON.stringify(updateEmployeeRole[1]);
 
-        response.forEach((employee) => {
-          if (
-            answer.chosenEmployee ===
-            `${employee.first_name} ${employee.last_name}`
-          ) {
-            employeeID = employee.id;
-          }
-          console.log(employeeID, '---------employee ID in for each');
-        });
+              connection.query(
+                  `UPDATE employee
+                  SET role_id = ${answers.role}
+                  WHERE first_name = ${updateEmployeeRoleFirstName}
+                  AND last_name = ${updateEmployeeRoleLastName}`,
 
-        let sqls = `UPDATE employee 
-        SET employee.role_id = ? 
-        WHERE employee.id = ?`;
-        connection.query(sqls, newTitleID, employeeID, (error) => {
-          if (error) throw error;
-          console.log(
-            "------------------------------------------------------------------"
-          );
-          console.log("Employee role updated successfully!");
-          console.log(
-            "------------------------------------------------------------------"
-          );
-          menu();
-        });
-      });
-    });
-  });
+                  (err, res) => {
+                      if (err) throw err;
+                      console.log(
+                        "------------------------------------------------------------------"
+                      );
+                      console.log("Employee role updated successfully!");
+                      viewAllEmployees();
+                  }
+              );
+          });
+      }
+  );  
 };
