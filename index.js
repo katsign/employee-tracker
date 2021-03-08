@@ -280,7 +280,7 @@ prompt([
           "------------------------------------------------------------------"
         );
         console.log(answer.newDepartment + " department added successfully!");
-        viewAllEmployees();
+        viewAllDepartments();
       });
     });
 };
