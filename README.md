@@ -1,5 +1,8 @@
+<div align="center">
+
 # Command Line Employee Tracker :clipboard:
-![GitHub license](https://img.shields.io/badge/License-MIT-orange)
+![GitHub license](https://img.shields.io/badge/License-MIT-green)
+</div>
 
 ### This command line application manages a company's employees using Node, Inquirer, and MySQL.
 
@@ -9,7 +12,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
-- [Questions](#questions)
+- [Contact](#contact)
 
 ## *Description*
 Keep track of your team's relevant information like departments, roles and employees using this command line interface.
@@ -33,8 +36,10 @@ Keep track of your team's relevant information like departments, roles and emplo
 ### :heavy_check_mark: Update Action
 ![Demo of Command Line Update Role Prompt](./assets/screenshots/ss3.png)
 
-## *Questions?*
-- My Profile: [katsign](https://github.com/katsign)
+## *Contact*
+🔗 Links in Bio @[katsign](https://github.com/katsign)
+
+![Email Badge](https://img.shields.io/badge/Email%20Me-mailtokatsign%40gmail.com-d8bfd8)
 
 ---
 This project is MIT licensed. &copy; 2021
